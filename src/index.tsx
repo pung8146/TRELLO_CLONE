@@ -1,9 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
-import { createGlobalStyle } from "styled-components";
+
 import { RecoilRoot } from "recoil";
 
+import { ThemeProvider } from "styled-components";
+import { darkTheme } from "./theme";
+import { createGlobalStyle } from "styled-components";
 const GlobalStyle = createGlobalStyle`
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -35,8 +38,8 @@ footer, header, hgroup, main, menu, nav, section {
     display: none;
 }
 body {
-  line-height: 1;
-  background-color: salmon;
+  color:black;
+  background-color: ${(props) => props.theme.bgColor};
 }
 menu, ol, ul {
   list-style: none;
@@ -59,10 +62,10 @@ const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <GlobalStyle />
-    <RecoilRoot>
+  <RecoilRoot>
+    <ThemeProvider theme={darkTheme}>
+      <GlobalStyle />
       <App />
-    </RecoilRoot>
-  </React.StrictMode>
+    </ThemeProvider>
+  </RecoilRoot>
 );
